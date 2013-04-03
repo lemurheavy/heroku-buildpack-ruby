@@ -43,6 +43,8 @@ private
         topic("Preparing app for Rails asset pipeline")
         if File.exists?("public/assets/manifest.yml")
           puts "Detected manifest.yml, assuming assets were compiled locally"
+        elsif ENV["ASSETS_PRECOMPILED"].present?
+          puts "ASSETS_PRECOMPILED environment variable set, skipping precompilation"
         else
           ENV["RAILS_GROUPS"] ||= "assets"
           ENV["RAILS_ENV"]    ||= "production"
